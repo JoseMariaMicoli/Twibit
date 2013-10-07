@@ -19,6 +19,6 @@ urlpatterns = patterns('',
     url(r'^login$', 'twibit_app.views.login_view'), # login
     url(r'^logout$', 'twibit_app.views.logout_view'), # logout
     url(r'^signup$', 'twibit_app.views.signup'), # signup
-	url(r'^twibits$', 'twibit_app.views.public'), #public twibits
-	url(r'^submit$', 'twibit_app.views.submit'), #submit new twibit
+	url(r'^twibits$', 'twibit_app.views.public'),
+	url(r'^submit$', 'twibit_app.views.submit'),
 )

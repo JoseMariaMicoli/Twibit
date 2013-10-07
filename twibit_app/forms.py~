@@ -23,7 +23,7 @@ class UserCreateForm(UserCreationForm):
         fields = ['email', 'username', 'first_name', 'last_name', 'password1', 'password2']
         model = User
 
-class AuthenticateForm(AuthenticationForm):
+class UserAuthenticateForm(AuthenticationForm):
     username = forms.CharField(widget=forms.widgets.TextInput(attrs={'placeholder': 'Username'}))
     password = forms.CharField(widget=forms.widgets.PasswordInput(attrs={'placeholder': 'Password'}))
  

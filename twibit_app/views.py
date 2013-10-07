@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from twibit_app.forms import UserAuthenticateForm, UserCreateForm, TwibitForm
+from twibit_app.forms import AuthenticateForm, UserCreateForm, TwibitForm
 from models import Twibit
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request, auth_form=None, user_form=None):
@@ -20,7 +21,7 @@ def index(request, auth_form=None, user_form=None):
 
     else:
         #User is not logged in
-        auth_form = auth_form or UserAuthenticateForm()
+        auth_form = auth_form or AuthenticateForm()
         user_form = user_form or UserCreateForm()
 
         return render(request,
@@ -56,5 +57,27 @@ def signup(request):
         else:
             return index(request, user_form=user_form)
     return redirect('/')
+
+@login_required
+def submit(request):
+    if request.method == 'POST':
+        twibit_form = TwibitForm(data=request.POST)
+        next_url = request.POST.get("next_url", "/")
+        if twibit_form.is_valid():
+            twibit = twibit_form.sava(commit=False)
+            twibit.user = request.user
+            twibit.save()
+            return redirect(next_url)
+        else:
+            return public(request, twibit_form)
+    return redirect('/')
+
+@login_required
+def public(request, twibit_form=None):
+	twibit_form = twibit_form or TwibitForm()
+	twibits = Twibit.objects.reverse()[:10]
+	return render(request,
+		'public.html',
+		{'twibit_form': twibit_form, 'next_url': '/twibits', 'twibits': twibits, 'username': request.user.username})
 
 
