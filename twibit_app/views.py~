@@ -20,7 +20,7 @@ def index(request, auth_form=None, user_form=None):
 
     else:
         #User is not logged in
-        auth_form = auth_form or UserAuthenticateForm()
+        auth_form = auth_form or AuthenticateForm()
         user_form = user_form or UserCreateForm()
 
         return render(request,

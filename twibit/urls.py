@@ -14,4 +14,9 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
+    #twibit app urls
+    url(r'^$', 'twibit_app.views.index'), # root
+    url(r'^login$', 'twibit_app.views.login_view'), # login
+    url(r'^logout$', 'twibit_app.views.logout_view'), # logout
+    url(r'^signup$', 'twibit_app.views.signup'), # signup
 )
