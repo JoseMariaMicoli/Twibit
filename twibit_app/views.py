@@ -82,7 +82,7 @@ def submit(request):
         twibit_form = TwibitForm(data=request.POST)
         next_url = request.POST.get("next_url", "/")
         if twibit_form.is_valid():
-            twibit = twibit_form.sava(commit=False)
+            twibit = twibit_form.save(commit=False)
             twibit.user = request.user
             twibit.save()
             return redirect(next_url)

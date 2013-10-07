@@ -7,28 +7,28 @@
 
 {% block content %}
     <div class="panel right">
-        <h1>Create a Ribbit</h1>
+        <h1>Create a Twibit</h1>
         <p>
             <form action="/submit" method="post">
-            {% for field in ribbit_form %}{% csrf_token %}
+            {% for field in twibit_form %}{% csrf_token %}
             {{ field }}
             {% endfor %}
             <input type="hidden" value="{{ next_url }}" name="next_url">
-            <input type="submit" value="Ribbit!">
+            <input type="submit" value="Twibit!">
             </form>
         </p>
     </div>
     <div class="panel left">
-        <h1>Buddies' Ribbits</h1>
-        {% for ribbit in ribbits %}
-        <div class="ribbitWrapper">
-            <a href="/users/{{ ribbit.user.username }}">
-                <img class="avatar" src="{{ ribbit.user.profile.gravatar_url }}">
-                <span class="name">{{ ribbit.user.first_name }}</span>
+        <h1>Buddies' Twibits</h1>
+        {% for twibit in twibits %}
+        <div class="twibitWrapper">
+            <a href="/users/{{ twibit.user.username }}">
+                <img class="avatar" src="{{ twibit.user.profile.gravatar_url }}">
+                <span class="name">{{ twibit.user.first_name }}</span>
             </a>
-            @{{ ribbit.user.username }}
+            @{{ twibit.user.username }}
             <p>
-                {{ ribbit.content }}
+                {{ twibit.content }}
             </p>
         </div>
         {% endfor %}

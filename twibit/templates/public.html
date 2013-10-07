@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="panel right">
-        <h1>Create a Ribbit</h1>
+        <h1>Create a Twibit</h1>
         <p>
             <form action="/submit" method="post">
             {% for field in twibit_form %}{% csrf_token %}
@@ -18,7 +18,7 @@
         {% for twibit in twibits %}
         <div class="twibitWrapper">
             <img class="avatar" src="{{ twibit.user.profile.gravatar_url }}">
-            <span class="name">{{ twibit.user.first_name }}</span>@{{ twibit.user.username }}
+            <span class="name">{{ twibit.user.first_name }}</span><strong>@{{ twibit.user.username }}</strong>
             <span class="time">{{ twibit.creation_date|timesince }}</span>
             <p>{{ twibit.content }}</p>
         </div>

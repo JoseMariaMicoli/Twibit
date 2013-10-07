@@ -22,11 +22,11 @@
         <h1>Buddies' Twibits</h1>
         {% for twibit in twibits %}
         <div class="twibitWrapper">
-            <a href="/users/{{ ribbit.user.username }}">
+            <a href="/users/{{ twibit.user.username }}">
                 <img class="avatar" src="{{ twibit.user.profile.gravatar_url }}">
-                <span class="name">{{ ribbit.user.first_name }}</span>
+                <span class="name">{{ twibit.user.first_name }}</span>
             </a>
-            @{{ twibit.user.username }}
+            <strong>@{{ twibit.user.username }}</strong>
             <p>
                 {{ twibit.content }}
             </p>
