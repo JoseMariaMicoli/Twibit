@@ -1,26 +1,64 @@
 <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <html>
-<head>
-    <link rel="stylesheet/less" href="{{ STATIC_URL }}style.less">
-    <script src="{{ STATIC_URL }}less.js"></script>
-</head>
-<body>
-    <header>
-        <div class="wrapper">
-            <img src="{{ STATIC_URL }}gfx/logo.png">
-            <span>Twitter Clone</span>
-            {% block login %}
-            <a href="/">Home</a>
-            <a href="/users/">Public Profiles</a>
-            <a href="/users/{{ username }}">My Profile</a>
-            <a href="/twibits">Public Twibits</a>
-            <form action="/logout">
-                <input type="submit" id="btnLogOut" value="Log Out">
+	<head>
+		<meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>Twibit!</title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width"/>
+		<link href="{{ STATIC_URL }}/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link rel="stylesheet/less" href="{{ STATIC_URL }}main.less">
+        <script src="{{ STATIC_URL }}less.js"></script>
+
+		<link rel="favicon" href="root/Desktop/strowberrypy/img/favicon2.ico"/>
+		<!--[if lt IE 9]>
+			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+		<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+		  <a class="navbar-brand" href="/">Twibit</a>
+        </div>
+        <div class="navbar-collapse collapse">
+			{% block login %}
+			<ul class="nav navbar-nav">
+            	<li class="active"><a href="/">Home</a></li>
+            	<li><a href="/users/">Public Profiles</a></li>
+            	<li><a href="/users/{{ username }}">My Profile</a></li>
+				<li><a href="/twibits">Public Twibits</a></li>
+			</ul>
+			<form action="/logout">
+                <input type="submit" id="btn btn-success" value="Log Out">
             </form>
             {% endblock %}
-        </div>
-    </header>
-    <div id="content">
+
+            </div>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+    
+        
+
+		<!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+       	<div id="content">
         <div class="wrapper">
             {% block flash %}
             {% if auth_form.non_field_errors or user_form.non_field_errors or ribbit_form.errors %}
@@ -40,15 +78,22 @@
             {% block content %}
 
             {% endblock %}
-        </div>
+      </div>
     </div>
-    <footer>
-        <div class="wrapper">
-            Twibit - A Twiter Clone
-            <a href="http://www.djangoproject.com/">
-                <img src="https://www.djangoproject.com/m/img/badges/djangomade124x25.gif" border="0" alt="Made with Django." title="Made with Django." />
-            </a>
-        </div>
-    </footer>
-</body>
+
+    </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}/bootstrap/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+
+        <script src="{{ STATIC_URL }}/bootstrap/js/bootstrap.min.js"></script>
+
+        <script src="{{ STATIC_URL }}/bootstrap/js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+	</body>
 </html>
