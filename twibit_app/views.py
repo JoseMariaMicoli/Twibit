@@ -1,14 +1,29 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from twibit_app.forms import AuthenticateForm, UserCreateForm, TwibitForm
 from models import Twibit
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import viewsets
+from twibit_app.serializers import UserSerializer, GroupSerializer, TwibitSerializer
 
 # Create your views here.
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+class TwibitViewSet(viewsets.ModelViewSet):
+    queryset = Twibit.objects.all()
+    serializer_class = TwibitSerializer
+
 def index(request, auth_form=None, user_form=None):
     #User is logged in
     if request.user.is_authenticated():

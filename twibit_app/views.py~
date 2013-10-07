@@ -7,8 +7,23 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import viewsets
+from twibit_app.serializers import UserSerializer, GroupSerializer, TwibitSerializer
 
 # Create your views here.
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+class TwibitViewSet(viewsets.ModelViewSet):
+    queryset = Twibit.objects.all()
+    serializer_class = TwibitSerializer
+
 def index(request, auth_form=None, user_form=None):
     #User is logged in
     if request.user.is_authenticated():
@@ -110,4 +125,14 @@ def users(request, username="", twibit_form=None):
         'profiles.html',
         {'obj': obj, 'next_url': '/users/', 'twibit_form': twibit_form, 'username': request.user.username,})
 
-
+@login_required
+def follow(request):
+    if request.method == 'POST':
+        follow_id = request.POST.get('follow', False)
+        if follow_id:
+            try:
+                user = User.objects.get(id=follow_id)
+                request.user.profile.follows.add(user.profile)
+            except ObjectDoesNotExist:
+                return redirect('/users/')
+    return redirect('/users/')
