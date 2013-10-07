@@ -21,4 +21,7 @@ urlpatterns = patterns('',
     url(r'^signup$', 'twibit_app.views.signup'), # signup
 	url(r'^twibits$', 'twibit_app.views.public'), #public twibits
 	url(r'^submit$', 'twibit_app.views.submit'), #submit new twibit
+    url(r'^users/$', 'twibit_app.views.users'),
+    url(r'^users/(?P<username>\w{0,20})/$', 'twibit_app.views.users'),
+    url(r'^follows$', 'twibit_app.views.follow'),
 )
