@@ -1,4 +1,11 @@
 from django.conf.urls import patterns, include, url
+from rest_framework import routers
+from twibit_app import views
+
+router = routers.DefaultRouter()
+router.register(r'api/users', views.UserViewSet)
+router.register(r'api/groups', views.GroupViewSet)
+router.register(r'api/twibits', views.TwibitViewSet)
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -24,4 +31,6 @@ urlpatterns = patterns('',
     url(r'^users/$', 'twibit_app.views.users'),
     url(r'^users/(?P<username>\w{0,20})/$', 'twibit_app.views.users'),
     url(r'^follows$', 'twibit_app.views.follow'),
+	url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 )
