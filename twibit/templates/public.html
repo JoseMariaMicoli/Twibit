@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="panel right">
+        <h1>Create a Ribbit</h1>
+        <p>
+            <form action="/submit" method="post">
+            {% for field in twibit_form %}{% csrf_token %}
+            {{ field }}
+            {% endfor %}
+            <input type="hidden" value="{{ next_url }}" name="next_url">
+            <input type="submit" value="Twibit!">
+            </form>
+        </p>
+    </div>
+    <div class="panel left">
+        <h1>Public Twibits</h1>
+        {% for twibit in twibits %}
+        <div class="twibitWrapper">
+            <img class="avatar" src="{{ twibit.user.profile.gravatar_url }}">
+            <span class="name">{{ twibit.user.first_name }}</span>@{{ twibit.user.username }}
+            <span class="time">{{ twibit.creation_date|timesince }}</span>
+            <p>{{ twibit.content }}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
